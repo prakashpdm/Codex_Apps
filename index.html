@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task Reminder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Reminder hub</p>
+          <h1>Stay on top of every task.</h1>
+          <p class="subtitle">
+            Add your reminders, track what is due, and keep finished work out of the way.
+          </p>
+        </div>
+        <div class="summary" id="summary"></div>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <h2>Create a reminder</h2>
+          <form id="task-form">
+            <label>
+              Task name
+              <input type="text" id="task-title" placeholder="Prepare weekly report" required />
+            </label>
+            <label>
+              Due date
+              <input type="date" id="task-date" required />
+            </label>
+            <label>
+              Due time
+              <input type="time" id="task-time" required />
+            </label>
+            <label>
+              Notes
+              <textarea id="task-notes" rows="3" placeholder="Optional details"></textarea>
+            </label>
+            <div class="button-row">
+              <button type="submit" class="primary">Add reminder</button>
+              <button type="reset" class="ghost">Clear</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2>Upcoming reminders</h2>
+              <p class="hint">Tap a reminder to mark it complete.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="show-complete" />
+              <span>Show completed</span>
+            </label>
+          </div>
+          <div id="task-list" class="task-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="task-template">
+      <button class="task" type="button">
+        <div>
+          <h3 class="task-title"></h3>
+          <p class="task-notes"></p>
+        </div>
+        <div class="task-meta">
+          <span class="task-time"></span>
+          <span class="task-badge"></span>
+        </div>
+      </button>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
