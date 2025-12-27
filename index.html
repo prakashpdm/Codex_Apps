@@ -3,17 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Task Reminder</title>
+    <title>Finance Snapshot</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header class="hero">
         <div>
-          <p class="eyebrow">Reminder hub</p>
-          <h1>Stay on top of every task.</h1>
+          <p class="eyebrow">Personal finance mobile hub</p>
+          <h1>Track cards, savings, and portfolio growth in one view.</h1>
           <p class="subtitle">
-            Add your reminders, track what is due, and keep finished work out of the way.
+            Capture monthly credit card payments and income in AED, plan your savings target,
+            and keep an INR SIP portfolio with live SWP totals.
           </p>
         </div>
         <div class="summary" id="summary"></div>
@@ -21,58 +22,129 @@
 
       <main class="grid">
         <section class="card">
-          <h2>Create a reminder</h2>
-          <form id="task-form">
+          <div class="card-header">
+            <div>
+              <h2>Monthly cashflow (AED)</h2>
+              <p class="hint">Log income and credit card payments to see your net position.</p>
+            </div>
+          </div>
+          <form id="cashflow-form" class="stack">
             <label>
-              Task name
-              <input type="text" id="task-title" placeholder="Prepare weekly report" required />
+              Entry type
+              <select id="cashflow-type" required>
+                <option value="income">Income</option>
+                <option value="payment">Credit card payment</option>
+              </select>
+            </label>
+            <label>
+              Amount (AED)
+              <input type="number" id="cashflow-amount" min="0" step="0.01" placeholder="1500" required />
             </label>
             <label>
               Due date
-              <input type="date" id="task-date" required />
-            </label>
-            <label>
-              Due time
-              <input type="time" id="task-time" required />
+              <input type="date" id="cashflow-date" required />
             </label>
             <label>
               Notes
-              <textarea id="task-notes" rows="3" placeholder="Optional details"></textarea>
+              <input type="text" id="cashflow-notes" placeholder="Salary, Visa, etc." />
             </label>
             <div class="button-row">
-              <button type="submit" class="primary">Add reminder</button>
+              <button type="submit" class="primary">Add entry</button>
               <button type="reset" class="ghost">Clear</button>
             </div>
           </form>
+          <div id="cashflow-list" class="list"></div>
         </section>
 
         <section class="card">
           <div class="card-header">
             <div>
-              <h2>Upcoming reminders</h2>
-              <p class="hint">Tap a reminder to mark it complete.</p>
+              <h2>Savings target (AED)</h2>
+              <p class="hint">Plan your goal and track the gap to your target date.</p>
             </div>
-            <label class="toggle">
-              <input type="checkbox" id="show-complete" />
-              <span>Show completed</span>
-            </label>
           </div>
-          <div id="task-list" class="task-list"></div>
+          <form id="savings-form" class="stack">
+            <label>
+              Target amount (AED)
+              <input type="number" id="savings-target" min="0" step="0.01" placeholder="25000" required />
+            </label>
+            <label>
+              Target date
+              <input type="date" id="savings-date" required />
+            </label>
+            <label>
+              Current saved (AED)
+              <input type="number" id="savings-current" min="0" step="0.01" placeholder="8200" required />
+            </label>
+            <label>
+              Monthly add-on (AED)
+              <input type="number" id="savings-monthly" min="0" step="0.01" placeholder="1200" />
+            </label>
+            <div class="button-row">
+              <button type="submit" class="primary">Update target</button>
+            </div>
+          </form>
+          <div id="savings-summary" class="callout"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2>SIP portfolio + SWP (INR)</h2>
+              <p class="hint">Track funds in INR and total your monthly SWP value.</p>
+            </div>
+          </div>
+          <form id="portfolio-form" class="stack">
+            <label>
+              Fund name
+              <input type="text" id="portfolio-name" placeholder="Nifty Index Fund" required />
+            </label>
+            <label>
+              Units
+              <input type="number" id="portfolio-units" min="0" step="0.001" placeholder="120.5" required />
+            </label>
+            <label>
+              NAV (INR)
+              <input type="number" id="portfolio-nav" min="0" step="0.01" placeholder="32.75" required />
+            </label>
+            <label>
+              Monthly SWP (INR)
+              <input type="number" id="portfolio-swp" min="0" step="0.01" placeholder="2500" required />
+            </label>
+            <div class="button-row">
+              <button type="submit" class="primary">Add fund</button>
+              <button type="reset" class="ghost">Clear</button>
+            </div>
+          </form>
+          <div id="portfolio-list" class="list"></div>
         </section>
       </main>
     </div>
 
-    <template id="task-template">
-      <button class="task" type="button">
+    <template id="cashflow-template">
+      <div class="list-item">
         <div>
-          <h3 class="task-title"></h3>
-          <p class="task-notes"></p>
+          <h3 class="item-title"></h3>
+          <p class="item-meta"></p>
         </div>
-        <div class="task-meta">
-          <span class="task-time"></span>
-          <span class="task-badge"></span>
+        <div class="item-value">
+          <span class="item-amount"></span>
+          <button class="item-action" type="button">Remove</button>
         </div>
-      </button>
+      </div>
+    </template>
+
+    <template id="portfolio-template">
+      <div class="list-item">
+        <div>
+          <h3 class="item-title"></h3>
+          <p class="item-meta"></p>
+        </div>
+        <div class="item-value">
+          <span class="item-amount"></span>
+          <button class="item-action" type="button">Remove</button>
+        </div>
+      </div>
     </template>
 
     <script src="app.js"></script>
