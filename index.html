@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Finance Snapshot</title>
+    <meta name="theme-color" content="#4f46e5" />
+    <title>Portfolio Pulse</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="page">
       <header class="hero">
         <div>
-          <p class="eyebrow">Personal finance mobile hub</p>
-          <h1>Track cards, savings, and portfolio growth in one view.</h1>
+          <p class="eyebrow">All-in-one money cockpit</p>
+          <h1>Your income, expenses, savings, and targets—one monthly view.</h1>
           <p class="subtitle">
-            Capture monthly credit card payments and income in AED, plan your savings target,
-            and keep an INR SIP portfolio with live SWP totals.
+            Track every cash move, log FD/Mutual Fund/Stock savings, set multiple targets,
+            and see a month-by-month portfolio snapshot that works beautifully on mobile.
           </p>
         </div>
         <div class="summary" id="summary"></div>
@@ -24,8 +25,8 @@
         <section class="card">
           <div class="card-header">
             <div>
-              <h2>Monthly cashflow (AED)</h2>
-              <p class="hint">Log income and credit card payments to see your net position.</p>
+              <h2>Income & expenses</h2>
+              <p class="hint">One single screen to add everything you earn or spend.</p>
             </div>
           </div>
           <form id="cashflow-form" class="stack">
@@ -33,20 +34,20 @@
               Entry type
               <select id="cashflow-type" required>
                 <option value="income">Income</option>
-                <option value="payment">Credit card payment</option>
+                <option value="expense">Expense</option>
               </select>
             </label>
             <label>
-              Amount (AED)
-              <input type="number" id="cashflow-amount" min="0" step="0.01" placeholder="1500" required />
+              Amount
+              <input type="number" id="cashflow-amount" min="0" step="0.01" placeholder="25000" required />
             </label>
             <label>
-              Due date
+              Date
               <input type="date" id="cashflow-date" required />
             </label>
             <label>
               Notes
-              <input type="text" id="cashflow-notes" placeholder="Salary, Visa, etc." />
+              <input type="text" id="cashflow-notes" placeholder="Salary, rent, groceries" />
             </label>
             <div class="button-row">
               <button type="submit" class="primary">Add entry</button>
@@ -59,82 +60,84 @@
         <section class="card">
           <div class="card-header">
             <div>
-              <h2>Savings target (AED)</h2>
-              <p class="hint">Plan your goal and track the gap to your target date.</p>
+              <h2>Savings portfolio</h2>
+              <p class="hint">Track your FD, Mutual Funds, and Stocks in one place.</p>
             </div>
           </div>
           <form id="savings-form" class="stack">
             <label>
-              Target amount (AED)
-              <input type="number" id="savings-target" min="0" step="0.01" placeholder="25000" required />
+              Savings type
+              <select id="savings-type" required>
+                <option value="fd">Fixed Deposit</option>
+                <option value="mutual">Mutual Fund</option>
+                <option value="stocks">Stocks</option>
+              </select>
             </label>
             <label>
-              Target date
+              Amount invested
+              <input type="number" id="savings-amount" min="0" step="0.01" placeholder="12000" required />
+            </label>
+            <label>
+              Investment date
               <input type="date" id="savings-date" required />
             </label>
             <label>
-              Current saved (AED)
-              <input type="number" id="savings-current" min="0" step="0.01" placeholder="8200" required />
-            </label>
-            <label>
-              Monthly add-on (AED)
-              <input type="number" id="savings-monthly" min="0" step="0.01" placeholder="1200" />
+              Notes
+              <input type="text" id="savings-notes" placeholder="HDFC FD, SIP, Tata Motors" />
             </label>
             <div class="button-row">
-              <button type="submit" class="primary">Update target</button>
+              <button type="submit" class="primary">Add savings</button>
+              <button type="reset" class="ghost">Clear</button>
             </div>
           </form>
-          <div id="savings-summary" class="callout"></div>
+          <div id="savings-list" class="list"></div>
         </section>
 
         <section class="card">
           <div class="card-header">
             <div>
-              <h2>SIP portfolio + SWP (INR)</h2>
-              <p class="hint">Track funds in INR and total your monthly SWP value.</p>
+              <h2>Targets</h2>
+              <p class="hint">Add multiple targets and track the accumulated goal.</p>
             </div>
           </div>
-          <form id="portfolio-form" class="stack">
+          <form id="target-form" class="stack">
             <label>
-              Fund name
-              <input type="text" id="portfolio-name" placeholder="Nifty Index Fund" required />
+              Target name
+              <input type="text" id="target-name" placeholder="New car, Travel fund" required />
             </label>
             <label>
-              Units
-              <input type="number" id="portfolio-units" min="0" step="0.001" placeholder="120.5" required />
+              Target amount
+              <input type="number" id="target-amount" min="0" step="0.01" placeholder="250000" required />
             </label>
             <label>
-              NAV (INR)
-              <input type="number" id="portfolio-nav" min="0" step="0.01" placeholder="32.75" required />
+              Target date
+              <input type="date" id="target-date" required />
             </label>
             <label>
-              Monthly SWP (INR)
-              <input type="number" id="portfolio-swp" min="0" step="0.01" placeholder="2500" required />
+              Notes
+              <input type="text" id="target-notes" placeholder="Priority, category, etc." />
             </label>
             <div class="button-row">
-              <button type="submit" class="primary">Add fund</button>
-              <button type="reset" class="ghost">Clear</button>
+              <button type="submit" class="primary">Add target</button>
             </div>
           </form>
-          <div id="portfolio-list" class="list"></div>
+          <div id="targets-summary" class="callout"></div>
+          <div id="targets-list" class="list"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2>Monthly portfolio tracker</h2>
+              <p class="hint">Combined view of income, expenses, savings, and net portfolio.</p>
+            </div>
+          </div>
+          <div id="tracker" class="tracker"></div>
         </section>
       </main>
     </div>
 
-    <template id="cashflow-template">
-      <div class="list-item">
-        <div>
-          <h3 class="item-title"></h3>
-          <p class="item-meta"></p>
-        </div>
-        <div class="item-value">
-          <span class="item-amount"></span>
-          <button class="item-action" type="button">Remove</button>
-        </div>
-      </div>
-    </template>
-
-    <template id="portfolio-template">
+    <template id="list-template">
       <div class="list-item">
         <div>
           <h3 class="item-title"></h3>
