@@ -16,7 +16,7 @@ body {
 }
 
 .page {
-  max-width: 1150px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px 80px;
 }
@@ -45,7 +45,7 @@ h1 {
 
 .subtitle {
   color: #4b5563;
-  max-width: 520px;
+  max-width: 560px;
 }
 
 .summary {
@@ -194,8 +194,26 @@ button {
   color: #dc2626;
 }
 
-.item-amount.negative {
-  color: #dc2626;
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 11px;
+  background: #e0e7ff;
+  color: #3730a3;
+  margin-right: 6px;
+}
+
+.badge.expense {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge.savings {
+  background: #d1fae5;
+  color: #065f46;
 }
 
 .item-action {
@@ -229,4 +247,66 @@ button {
   padding: 18px;
   border-radius: 16px;
   border: 1px dashed #e5e7eb;
+}
+
+.tracker {
+  display: grid;
+  gap: 12px;
+}
+
+.tracker-row {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.tracker-row.header {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  font-weight: 600;
+  color: #4338ca;
+}
+
+.tracker-cell.negative {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.tracker-cell.positive {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 28px 16px 60px;
+  }
+
+  .summary {
+    width: 100%;
+  }
+
+  .tracker-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-row.header {
+    display: none;
+  }
+
+  .tracker-row > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tracker-row > div::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6b7280;
+  }
 }
